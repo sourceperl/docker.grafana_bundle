@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# run
+# create named volumes for data persistence (docker ignore create if volume already exist)
+docker volume create influxdb-data
+docker volume create grafana-data
+
+# run containers
 docker-compose up -d
 
 # user message
