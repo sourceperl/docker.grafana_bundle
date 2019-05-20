@@ -31,3 +31,8 @@ volumes:
   grafana-data:
     external:
       name: grafana-data
+
+networks:
+  default:
+    external:
+       name: influx-net
