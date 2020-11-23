@@ -11,12 +11,12 @@ services:
       - influxdb-data:/var/lib/influxdb
 
   grafana:
-    image: grafana:6.7.3-with-plugins
+    image: grafana:6.7.4-with-plugins
     build:
       context: ./grafana-with-plugins
       dockerfile: Dockerfile
       args:
-        GRAFANA_VERSION: 6.7.3
+        GRAFANA_VERSION: 6.7.4
         GF_INSTALL_PLUGINS: grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource,flant-statusmap-panel
     container_name: grafana
     restart: always
