@@ -5,7 +5,7 @@ docker volume create influxdb-data
 docker volume create grafana-data
 
 # create a network for all influxdb app
-docker network create influx-net
+docker network create influxdb-net
 
 # run containers
 docker-compose up -d

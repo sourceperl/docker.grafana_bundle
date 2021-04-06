@@ -2,13 +2,16 @@ version: "3"
 
 services:
   influxdb:
-    image: influxdb:1.7.10
+    image: influxdb:1.8.4
     container_name: influxdb
-    restart: always
+    restart: unless-stopped
     env_file:
       - env.influxdb
     volumes:
       - influxdb-data:/var/lib/influxdb
+    logging:
+      options:
+        max-size: "50m"
 
   grafana:
     image: grafana:6.7.4-with-plugins
@@ -16,10 +19,10 @@ services:
       context: ./grafana-with-plugins
       dockerfile: Dockerfile
       args:
-        GRAFANA_VERSION: 6.7.4
+        GRAFANA_VERSION: 6.7.6
         GF_INSTALL_PLUGINS: grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource,flant-statusmap-panel
     container_name: grafana
-    restart: always
+    restart: unless-stopped
     ports:
       - "3000:3000"
     env_file:
@@ -28,6 +31,9 @@ services:
       - influxdb
     volumes:
       - grafana-data:/var/lib/grafana
+    logging:
+      options:
+        max-size: "50m"
 
 volumes:
   influxdb-data:
@@ -41,4 +47,4 @@ volumes:
 networks:
   default:
     external:
-       name: influx-net
+       name: influxdb-net
